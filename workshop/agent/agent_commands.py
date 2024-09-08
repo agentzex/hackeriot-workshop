@@ -6,6 +6,7 @@ from workshop.protocol.common import *
 #  agent command definitions will appear here.
 
 
+# todo: #to-fill
 def handle_command(command_id, arguments):
     print(f"[+] Trying to run command handler for command {command_id}")
     if command_id not in command_id_to_command_handler:
@@ -108,3 +109,5 @@ command_id_to_command_handler = {
     RUNNING_PROCESSES_COMMAND_ID: list_running_processes,
     # FILE_UPLOAD_COMMAND_ID: ,
 }
+
+# todo: #to-fill

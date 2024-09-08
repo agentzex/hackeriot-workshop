@@ -15,6 +15,7 @@ class C2Protocol:
         self.socket.connect((self.dst_ip, self.dst_port))
         print(f"[+] Connected to agent at {self.dst_ip}:{self.dst_port}")
 
+    # todo: #to-fill
     def c2_hello_receive(self):
         message_type, status, agent_uuid = handle_init_handshake_receive(self.socket)
         if message_type != MESSAGE_REQUEST:
@@ -45,6 +46,7 @@ class C2Protocol:
 
         return status, receive_payload(self.socket, payload_size)
 
+    # todo: #to-fill
 
 
 

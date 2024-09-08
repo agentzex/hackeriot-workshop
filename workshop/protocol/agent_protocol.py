@@ -11,6 +11,7 @@ class AgentProtocol:
     def agent_hello_send(self, agent_uuid):
         return handle_init_handshake_send(self.client_socket, agent_uuid, MESSAGE_REQUEST)
 
+    # todo: #to-fill
     def receive_command_from_c2(self):
         command_id = receive_command_id(self.client_socket)
         print(f"[+] Received command {command_id} from C2")
@@ -32,7 +33,7 @@ class AgentProtocol:
              struct.pack(COMMAND_PAYLOAD_PACKET_FORMAT, MESSAGE_RESPONSE, command_status, len(command_response)) +
              command_response)
         )
-
+    # todo: #to-fill
 
 
 

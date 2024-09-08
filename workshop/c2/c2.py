@@ -64,6 +64,7 @@ class C2:
 
         print(f"[+] Received agent UUID: {agent_uuid}")
         # todo: check if agent uuid is allowed agent to communicate with this C2. if not return status error and refuse to handle further requests from this agent uuid
+        # optional
         if agent_uuid not in allowed_agent_uuid_list:
             self.c2_protocol.c2_hello_send(agent_uuid, status=MESSAGE_STATUS_ERROR)
             raise Exception(f"[-] {agent_uuid} is not in the allowed UUID list in the c2_config.yml file")
@@ -76,9 +77,8 @@ class C2:
 
 
 if __name__ == '__main__':
-    c2 = C2("127.0.0.1", 9900)
-    c2.connect()
+    # c2 = C2("127.0.0.1", 9900)
+    # c2.connect()
     print()
-    # agent.list_dir_send()
 
 

@@ -15,9 +15,13 @@ COMMANDS_ID_TO_DESCRIPTION = {
 
 # Define the format string for the packet with big-endian byte order
 # '>' - big-endian
+
+# todo: #to-fill
 COMMAND_ID_PACKET_FORMAT = ">I"  # 'I' - 4-byte uint : the command_id
 HANDSHAKE_PACKET_FORMAT = ">BB8s"  # Total size 10 ; 1 byte (request=1, response=2), 1 byte (status_none= 0, status_ok=1, status_error=2),  8-byte string - agent_uuid
 COMMAND_PAYLOAD_PACKET_FORMAT = ">BBI" #Total size 6 ; 1 byte (request=1, response=2), 1 byte (status_none= 0, status_ok=1, status_error=2),  4-byte uint - size of upcoming payload to recv()
+# todo: #to-fill
+
 
 MESSAGE_REQUEST = 1
 MESSAGE_RESPONSE = 2
@@ -59,12 +63,13 @@ def handle_init_handshake_receive(s):
     return message_type, status, agent_uuid.decode()
 
 
+# todo: #to-fill
 def handle_init_handshake_send(s, agent_uuid, message_type, status=MESSAGE_STATUS_NONE):
     s.sendall(
         (pack_command_id(HANDSHAKE_COMMAND_ID) +
          struct.pack(HANDSHAKE_PACKET_FORMAT, message_type, status, agent_uuid.encode()))
     )
-
+# todo: #to-fill
 
 def receive_payload(s, payload_size):
     if payload_size == 0:
