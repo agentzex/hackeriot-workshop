@@ -1,7 +1,7 @@
 import socket
 import time
 
-from workshop.protocol.common import *
+from protocol.common import *
 
 
 class C2Protocol:

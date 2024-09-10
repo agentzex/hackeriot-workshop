@@ -1,6 +1,6 @@
 import os
 import psutil
-from workshop.protocol.common import *
+from protocol.common import *
 
 
 #  agent command definitions will appear here.

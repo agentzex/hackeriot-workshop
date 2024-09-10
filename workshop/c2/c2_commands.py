@@ -1,4 +1,4 @@
-from workshop.protocol.common import *
+from protocol.common import *
 import os
 
 

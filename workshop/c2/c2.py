@@ -1,7 +1,7 @@
 import os
 import yaml
-from workshop.protocol import validator
-from workshop.protocol.c2_protocol import *
+from protocol import validator
+from protocol.c2_protocol import *
 import c2_commands
 
 

@@ -1,5 +1,5 @@
-from workshop.protocol.agent_protocol import *
-from workshop.agent import agent_commands
+from protocol.agent_protocol import *
+from agent import agent_commands
 
 import threading
 

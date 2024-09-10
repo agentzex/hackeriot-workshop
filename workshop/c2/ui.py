@@ -1,6 +1,6 @@
 import argparse
 from c2 import C2
-from workshop.protocol.common import COMMANDS_ID_TO_DESCRIPTION
+from protocol.common import COMMANDS_ID_TO_DESCRIPTION
 
 
 def display_menu():

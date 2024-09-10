@@ -1,5 +1,5 @@
-from workshop.protocol import validator
-from workshop.agent.agent_connection_handler import ConnectionHandler
+from protocol import validator
+from agent.agent_connection_handler import ConnectionHandler
 import socket
 import argparse
 import os
