@@ -73,6 +73,14 @@ Additional functionalities, protocols and abilities for the agent to execute can
 After adding new ability, add its function handler to the function handler dictionaries in both the agent and c2 code.
 It will then be automatically added also to the C2 UI.
 
+#### Running the agent inside a docker:
+- Run: ubuntu_docker_run -S <ssh_port> -P <server_port_range>
+  -  '-S' Port number to bind SSH server to, on the host
+  -  '-P' Range of ports or single port to bind on the host, that will be used for agents servers by the participants
+- Each participant should be allocated their own port number that their agent server will be listening on
+- Each participant should have access via SSH to the docker container, and have their own folder when they can upload and execute their solution
+
+
 ### Requirements
 
 Required Knowledge for doing this workshop:
