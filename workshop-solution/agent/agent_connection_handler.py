@@ -1,6 +1,5 @@
 from protocol.agent_protocol import *
 from agent import agent_commands
-
 import threading
 
 
@@ -19,7 +18,6 @@ class ConnectionHandler(threading.Thread):
         This method runs in the thread and handles agent communication.
         """
         print(f"[+] Incoming connection from {self.client_address}")
-
         try:
             if not self.agent_hello():
                 raise Exception("[-] Agent hello failed")

