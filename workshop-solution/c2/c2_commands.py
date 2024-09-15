@@ -59,7 +59,7 @@ def no_arguments_required():
 
 
 def get_path():
-    path = input("Enter requested absolute path on agent file system")
+    path = input("Enter requested absolute path on agent file system:\n")
     if not os.path.isabs(path):
         raise ValueError(f"[-] {path} isn't a valid absolute path. Try again")
 

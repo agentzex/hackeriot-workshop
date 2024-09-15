@@ -1,3 +1,9 @@
+import os
+import sys
+
+# Add the project root directory to sys.path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
+
 import argparse
 from c2 import C2
 from protocol.common import COMMANDS_ID_TO_DESCRIPTION
