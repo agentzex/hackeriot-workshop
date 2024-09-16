@@ -47,9 +47,47 @@ DEFAULT_RECV_BUFFER = 4096
 # 3. C2 sends c2_hello() -> agent receives connect request success/fail
 #     if fail -> agent exit
 #     if success -> agent waits for incoming commands
-#4. Agent gains persistency on server via cron job (allow server to start if not already started)
+#4. Agent gains oldpersistency on server via cron job (allow server to start if not already started)
 # 5. C2 receives commands from user's UI and send to agent
 # 6. agent executes and sends response to C2
+
+
+# Typical Command packet format: (COMMAND_PAYLOAD_PACKET_FORMAT)
+
+# #   0             1               2               3
+#     0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#    |                        Command ID
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#    |type(req/resp)|     status    |    size                  of
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#       upcoming      payload       | payload ( based on size-of-payload)
+# #
+
+
+
+# File upload command packet format: (FILE_UPLOAD_PACKET_FORMAT)
+
+# #   0             1               2               3
+#     0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#    |                        Command ID
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#    |type(req/resp)|     status    |    size                  of
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#       file         path           |    size                  of
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#       upcoming      payload       | file path ( based on size-of-file-path)
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#       ...
+#    +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#        payload ( based on size-of-payload)
+# #
+
+
+
+
+
 
 
 def pack_command_id(command_id: int):
