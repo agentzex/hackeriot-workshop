@@ -49,6 +49,8 @@ The overall flow from both sides in high level:
 6. agent executes and sends response to C2
 
 
+![packet formats image](https://github.com/agentzex/hackeriot-workshop-2024/blob/main/packets_formats.jpg)
+
 
 #### Folders structure:
 - agent: code that will run on the agent(infected endpoint) side
