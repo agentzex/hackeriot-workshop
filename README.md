@@ -1,4 +1,4 @@
-# Hackeriot Workshop
+~~# Hackeriot Workshop
 This workshop was originally built for Hackeriot - a conference for promoting women in Cybersecurity careers. 
 Read more here https://www.hackeriot.org/
 
@@ -13,12 +13,13 @@ and will build a simple agent and c2 system using Python.
 
 * workshop folder: Has most of the code written, and other sections that are surrounded by 
 
+
     #todo: #to-fill \
     ... some code ... \
     ................. \
     #todo: #to-fill
     
-    block tag, can be an optional functions/code the participant will need to implement by itself. 
+block tag, can be an optional functions/code the participant will need to implement by itself. 
 
 *Use only built-in Python standard libraries to solve the workshop (no need for 3rd party libraries installed via PIP) 
 
@@ -94,5 +95,5 @@ Required tools from each participant:
 2. SSH client (MobaXterm recommended) or some kind of public git account (github, gitlab etc...) in order to upload and pull agent's server code on the cloud VM
 
 Recommended tools:
-1. Pycharm or other preferred IDE
+1. Pycharm or other preferred IDE~~
 
