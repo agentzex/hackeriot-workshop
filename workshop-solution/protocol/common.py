@@ -85,11 +85,6 @@ DEFAULT_RECV_BUFFER = 4096
 # #
 
 
-
-
-
-
-
 def pack_command_id(command_id: int):
     return struct.pack(COMMAND_ID_PACKET_FORMAT, command_id)
 

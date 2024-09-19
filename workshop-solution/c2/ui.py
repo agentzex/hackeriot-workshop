@@ -38,7 +38,8 @@ def parse_arguments():
     return args.ip, args.port
 
 
-def main(dst_ip, dst_port):
+def main():
+    dst_ip, dst_port = parse_arguments()
     print("------------C2 SERVER-------------------\n")
     c2 = C2(dst_ip, dst_port)
     c2.connect()
@@ -51,5 +52,4 @@ def main(dst_ip, dst_port):
 
 
 if __name__ == "__main__":
-    dst_ip, dst_port = parse_arguments()
-    main(dst_ip, dst_port)
+    main()

