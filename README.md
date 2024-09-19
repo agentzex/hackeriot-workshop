@@ -1,4 +1,4 @@
-~~# Hackeriot Workshop
+# Hackeriot Workshop
 This workshop was originally built for Hackeriot - a conference for promoting women in Cybersecurity careers. 
 Read more here https://www.hackeriot.org/
 
