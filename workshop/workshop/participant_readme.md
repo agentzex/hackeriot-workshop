@@ -59,6 +59,7 @@ This port will be the one you should enter when connecting to the agent from ui.
 *Each one of you have a folder based on your port number on the server side - please upload your code only to your folder!
 For example if you received port 30000, your folder is /home/hackeriot/3000/<put your agent code here>
 
+*I've hidden a secret file somewhere in the server. Can you find it? 
 
 ### Requirements
 
